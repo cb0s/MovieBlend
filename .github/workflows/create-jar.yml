@@ -1,4 +1,7 @@
-on: [push]
+on:
+  push:
+    branches:
+      - master
 
 jobs:
   build:
@@ -32,10 +35,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: v0.1.0-pre
-          release_name: v0.1.0-pre
+          tag_name: v0.1.0
+          release_name: v0.1.0
           draft: false
-          prerelease: true
+          prerelease: false
       - name: Download created assets
         uses: actions/download-artifact@v2
         with:
