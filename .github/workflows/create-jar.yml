@@ -1,7 +1,4 @@
-on:
-  push:
-    branches:
-      - master
+on: [push]
 
 jobs:
   build:
@@ -27,7 +24,7 @@ jobs:
   release:
     needs: build
     runs-on: ubuntu-latest
-    #if: success() && github.ref == 'refs/heads/master'
+    if: success() && github.ref == 'refs/heads/main'
     steps:
       - name: Create Release
         id: create_release
