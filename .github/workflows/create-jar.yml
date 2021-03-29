@@ -23,7 +23,7 @@ jobs:
   release:
     needs: build
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/master'
+    #if: success() && github.ref == 'refs/heads/master'
     steps:
       - name: Create Release
         id: create-release
