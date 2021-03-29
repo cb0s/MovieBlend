@@ -13,7 +13,7 @@ jobs:
         run: |
           javac ./com/github/cb0s/movieblend/MovieScreen.java
           mkdir staging
-          jar cfM staging/screen-blend.jar ./com/github/cb0s/movieblend/MovieScreen.class
+          jar cf staging/screen-blend.jar ./com/github/cb0s/movieblend/MovieScreen.class
       - name: Publish artifacts
         uses: actions/upload-artifact@v2
         with:
