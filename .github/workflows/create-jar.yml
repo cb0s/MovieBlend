@@ -16,6 +16,7 @@ jobs:
           mkdir staging
           echo $'Manifest-Version: 1.0\r\nMain-Class: com.github.cb0s.movieblend.MovieScreen\r\nClass-Path: .' > MANIFEST.MF
           jar cfm staging/screen-blend.jar ./MANIFEST.MF ./com/github/cb0s/movieblend/MovieScreen.class
+          cp README.md LICENCE ./staging/
       - name: Publish artifacts
         uses: actions/upload-artifact@v2
         with:
@@ -26,15 +27,13 @@ jobs:
     #if: success() && github.ref == 'refs/heads/master'
     steps:
       - name: Create Release
-        id: create-release
+        id: create_release
         uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
-          body: |
-            First release. There are no changes, yet!
           draft: false
           prerelease: false
       - name: Upload Release Asset
@@ -45,5 +44,5 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
           asset_path: ./artifact.zip
-          asset_name: release.zip
+          asset_name: latest.zip
           asset_content_type: application/zip
