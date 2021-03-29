@@ -16,7 +16,7 @@ jobs:
           mkdir staging
           echo $'Manifest-Version: 1.0\r\nMain-Class: com.github.cb0s.movieblend.MovieScreen\r\nClass-Path: .' > MANIFEST.MF
           jar cfm staging/screen-blend.jar ./MANIFEST.MF ./com/github/cb0s/movieblend/MovieScreen.class
-          cp README.md LICENCE ./staging/
+          cp README.md LICENSE ./staging/
       - name: Publish artifacts
         uses: actions/upload-artifact@v2
         with:
@@ -24,7 +24,7 @@ jobs:
   release:
     needs: build
     runs-on: ubuntu-latest
-    #if: success() && github.ref == 'refs/heads/master'
+    if: success() && github.ref == 'refs/heads/master'
     steps:
       - name: Create Release
         id: create_release
